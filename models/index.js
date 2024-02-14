@@ -1,6 +1,6 @@
 // Imports
-const User = require("./user.js");
-const Thought = require("./Thought");
+const User = require("./User.js");
+const Thought = require("./Thought.js");
 
 // Exports
 module.exports = { User, Thought };
