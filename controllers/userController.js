@@ -5,7 +5,8 @@ const { User, Thought } = require("../models");
   async getUsers(req, res) {
     try {
       const users = await User.find()
-
+        /* Mongoose operator allows field population with data from other collections/table
+        equivalents like thought */
         .populate({ path: "thoughts", select: "-__v" })
         .populate({ path: "friends", select: "-__v" });
 
@@ -25,10 +26,60 @@ const { User, Thought } = require("../models");
         .populate({ path: "friends", select: "-__v" });
 
       if (!user) {
-        return res.status(404).json({ message: "No user with that ID" });
+        return res.status(404).json({ message: "No user with that ID can be found!" });
       }
 
       return res.status(200).json(user);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  };
+
+   // Create user
+   async createUser(req, res) {
+    try {
+      const user = await User.create(req.body);
+      return res.status(200).json(user);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  };
+
+  // Update user
+  async updateUser(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      );
+
+      if (!user) {
+        return res.status(404).json({ message: "No user with that ID can be found!" });
+      }
+
+      return res.status(200).json(user);
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json(err);
+    }
+  };
+
+  // Delete user
+  async deleteUser(req, res) {
+    try {
+      const user = await User.findOneAndDelete({ _id: req.params.userId });
+
+      if (!user) {
+        return res.status(404).json({ message: "No user with that ID can be found!" });
+      }
+    //   Cascading deletion to associated Thoughts
+      await Thought.deleteMany({ _id: { $in: user.thoughts } });
+      return res.status(200).json({
+        message: "The User, along with its associated thoughts and reactions, has been deleted.",
+      });
     } catch (err) {
       console.log(err);
       return res.status(500).json(err);
