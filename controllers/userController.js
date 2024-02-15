@@ -2,6 +2,7 @@
 const { User, Thought } = require("../models");
 
 // Get all users
+const userController = {
   async getUsers(req, res) {
     try {
       const users = await User.find()
@@ -15,7 +16,7 @@ const { User, Thought } = require("../models");
       console.log(err);
       return res.status(500).json(err);
     }
-  };
+  },
 
   // Get single user
   async getUser(req, res) {
@@ -34,7 +35,7 @@ const { User, Thought } = require("../models");
       console.log(err);
       return res.status(500).json(err);
     }
-  };
+  },
 
    // Create user
    async createUser(req, res) {
@@ -45,7 +46,7 @@ const { User, Thought } = require("../models");
       console.log(err);
       return res.status(500).json(err);
     }
-  };
+  },
 
   // Update user
   async updateUser(req, res) {
@@ -65,7 +66,7 @@ const { User, Thought } = require("../models");
       console.log(err);
       return res.status(500).json(err);
     }
-  };
+  },
 
   // Delete user
   async deleteUser(req, res) {
@@ -84,4 +85,8 @@ const { User, Thought } = require("../models");
       console.log(err);
       return res.status(500).json(err);
     }
-  };
+  },
+};
+
+  // Exports
+module.exports = userController;
