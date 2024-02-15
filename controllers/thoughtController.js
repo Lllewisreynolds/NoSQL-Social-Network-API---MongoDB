@@ -2,6 +2,7 @@
 const { User, Thought } = require("../models");
 
 // Get all thoughts from database
+const thoughtController = {
   async getThoughts(req, res) {
     try {
       const thoughts = await Thought.find();
@@ -10,7 +11,7 @@ const { User, Thought } = require("../models");
       console.log(err);
       return res.status(500).json(err);
     }
-  };
+  },
 
   // Get single thought by id
   async getThought(req, res) {
@@ -26,7 +27,7 @@ const { User, Thought } = require("../models");
       console.log(err);
       return res.status(500).json(err);
     }
-  };
+  },
 
   // Create new thought and associate with user
   async createThought(req, res) {
@@ -44,7 +45,7 @@ const { User, Thought } = require("../models");
       console.log(err);
       return res.status(500).json(err);
     }
-  };
+  },
 
   // Update existing thought by its id
   async updateThought(req, res) {
@@ -64,7 +65,7 @@ const { User, Thought } = require("../models");
       console.log(err);
       return res.status(500).json(err);
     }
-  };
+  },
 
   // Delete a thought by its id
   async deleteThought(req, res) {
@@ -85,4 +86,9 @@ const { User, Thought } = require("../models");
       console.log(err);
       return res.status(500).json(err);
     }
-  };
+  },
+};
+
+// Exports
+
+module.exports = thoughtController;
