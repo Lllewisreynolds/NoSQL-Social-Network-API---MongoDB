@@ -91,7 +91,7 @@ The video walkthrough below details the endpoints used for our CRUD operations a
 
 ## Video Walkthrough
 
-[Link to video walkthrough of API routes' endpoints / CRUD operations being used with Social Network API Back-End ]()
+[Link to video walkthrough of API routes' endpoints / CRUD operations being used with Social Network API Back-End ](https://drive.google.com/file/d/13kDt7_PyJJuA3BFlIxg7dGYJMe8Hb151/view)
 
       
 ## Questions
