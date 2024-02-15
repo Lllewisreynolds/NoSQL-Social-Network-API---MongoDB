@@ -8,6 +8,8 @@ const {
   createUser,
   updateUser,
   deleteUser,
+  addFriend,
+  deleteFriend,
 } = require("../../controllers/userController");
 
 // Route Definitions:
@@ -22,6 +24,11 @@ router
   .get(getUser)
   .put(updateUser)
   .delete(deleteUser);
+
+
+  /* Route -> http://localhost:3001/api/users/:userId/friends/:friendId - 
+chaining multiple route call method handlers as above also for streamlining/organisational clarity */
+router.route("/:userId/friends/:friendId").post(addFriend).delete(deleteFriend);
 
 // Exports
 module.exports = router;
